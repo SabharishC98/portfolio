@@ -102,7 +102,7 @@ const AboutSection = ({ proMode }) => {
               >
                 <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-[#050505]">
                   <img
-                    src="/profile.png"
+                    src={`${import.meta.env.BASE_URL}profile.png`}
                     alt={personal.name}
                     className="w-full h-full object-cover object-top filter grayscale contrast-125"
                     loading="lazy"

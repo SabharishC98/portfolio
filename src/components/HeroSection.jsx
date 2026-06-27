@@ -170,7 +170,7 @@ const HeroSection = ({ proMode }) => {
           </button>
 
           <a
-            href={personal.resume}
+            href={`${import.meta.env.BASE_URL}${personal.resume.startsWith('/') ? personal.resume.substring(1) : personal.resume}`}
             download
             ref={btnRef2}
             onClick={() => window.dispatchEvent(new CustomEvent('hud-log', { detail: 'ACTION: DOWNLOAD_RESUME' }))}
