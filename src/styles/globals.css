@@ -500,3 +500,252 @@ body {
   box-shadow: 0 0 20px rgba(16, 185, 129, 0.2) !important;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   TRIONN-INSPIRED ANIMATIONS
+───────────────────────────────────────────────────────────── */
+
+/* 1. Horizontal marquee ticker */
+@keyframes marquee-ltr {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-ltr 22s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-wrapper {
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  /* Fade edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+/* 2. Section title underline wipe (left → right on inView) */
+.line-wipe {
+  position: relative;
+  display: inline-block;
+}
+
+.line-wipe::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 1px;
+  width: 0%;
+  background: currentColor;
+  transition: width 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.line-wipe.in-view::after {
+  width: 100%;
+}
+
+/* 3. Char overflow clip (parent must have overflow: hidden) */
+.char-clip-parent {
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* 4. Crosshair cursor hide on mobile */
+@media (hover: none) {
+  .floating-crosshair {
+    display: none !important;
+  }
+}
+
+/* 5. Trionn belt transition overlay */
+.pt-belt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 6. Smooth link clone hover (Trionn nav-link style) */
+.trionn-link {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.trionn-link .original {
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1),
+              opacity  0.45s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.trionn-link .clone {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1),
+              opacity  0.45s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.trionn-link:hover .original {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.trionn-link:hover .clone {
+  transform: translateY(-100%);
+  opacity: 1;
+}
+
+/* 7. Achievement card fixed minimum height for image reveal */
+.achievement-card {
+  min-height: 160px;
+}
+
+/* 8. Animated number slot-reel for stats */
+@keyframes slot-spin {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+.slot-reel {
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: column;
+  height: 1em;
+}
+
+.slot-strip {
+  display: flex;
+  flex-direction: column;
+  animation: slot-spin 0.6s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   PREMIUM ANIMATION ADDITIONS
+───────────────────────────────────────────────────────────── */
+
+/* Morphing blob */
+.morphblob-wrap {
+  pointer-events: none;
+  position: absolute;
+  animation: blob-float 18s ease-in-out infinite alternate;
+}
+
+.morphblob-svg {
+  animation: blob-rotate 30s linear infinite;
+  filter: blur(1px);
+}
+
+@keyframes blob-float {
+  0%   { transform: translateY(0px) scale(1); }
+  50%  { transform: translateY(-30px) scale(1.04); }
+  100% { transform: translateY(10px) scale(0.97); }
+}
+
+@keyframes blob-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* 3D tilt card — smooth transition on leave */
+.project-card {
+  transition: transform 0.12s ease, box-shadow 0.3s ease !important;
+  transform-style: preserve-3d;
+}
+
+/* Section title hover glow */
+.section-title {
+  transition: text-shadow 0.3s ease;
+}
+
+.section-title:hover {
+  text-shadow: 0 0 60px rgba(255,255,255,0.08);
+}
+
+/* Scramble text cursor blink caret */
+.scramble-caret::after {
+  content: '|';
+  animation: caret-blink 0.75s step-end infinite;
+  margin-left: 2px;
+  opacity: 0.6;
+}
+
+@keyframes caret-blink {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 0; }
+}
+
+/* Stat card pop on hover */
+.glass-hover:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Skill pill lift */
+.skill-pill {
+  transition: transform 0.25s var(--ease-out-expo),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease,
+              background 0.25s ease;
+}
+
+.skill-pill:hover {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 6px 24px rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.25) !important;
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* Scroll progress glow pulse */
+@keyframes progress-pulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(255,255,255,0.35); }
+  50%       { box-shadow: 0 0 14px rgba(255,255,255,0.6); }
+}
+
+/* Achievement card tilt */
+.achievement-card {
+  min-height: 160px;
+  transition: transform 0.15s ease, box-shadow 0.3s ease !important;
+}
+
+.achievement-card:hover {
+  transform: perspective(600px) rotateX(-3deg) rotateY(3deg) translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* Click burst — ensure canvas is above everything except cursor */
+canvas.click-burst {
+  z-index: 99994;
+  pointer-events: none;
+}
+
+/* Floating crosshair hide on mobile */
+@media (hover: none) {
+  .morphblob-wrap { display: none; }
+}
+
+
+
+

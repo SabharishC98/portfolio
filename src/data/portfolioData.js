@@ -144,13 +144,13 @@ export const portfolioData = {
   ],
 
   achievements: [
-    { rank: "Selected", event: "State Level Buildathon", org: "NxtWave x OpenAI Academy", date: "2025" },
-    { rank: "Finalist", event: "Hackathon", org: "Odooxkahe", date: "2025" },
-    { rank: "1st", event: "Coder's Arena", org: "Bannari Amman Institute of Technology", date: "Nov 2024" },
-    { rank: "1st", event: "Glitch Hunt (Debugging)", org: "Bannari Amman Institute of Technology", date: "Nov 2024" },
-    { rank: "1st", event: "Hack Quest", org: "Suguna College of Engineering", date: "Oct 2024" },
-    { rank: "1st", event: "Pixel Pursuit", org: "PSG iTech", date: "2024" },
-    { rank: "2nd", event: "Find Boo Boo", org: "SKCET", date: "Mar 2024" },
+    { rank: "Selected", event: "State Level Buildathon", org: "NxtWave x OpenAI Academy", date: "2025", image: "wins/state-level-buildathon.png" },
+    { rank: "Finalist", event: "Hackathon", org: "Odoo x KAHE Coimbatore", date: "2025", image: "wins/odoo-hackathon.png" },
+    { rank: "1st", event: "Coder's Arena", org: "Bannari Amman Institute of Technology", date: "Nov 2024", image: "wins/bannari-coder-arena.png" },
+    { rank: "1st", event: "Glitch Hunt (Debugging)", org: "Bannari Amman Institute of Technology", date: "Nov 2024", image: "wins/bannari-glitch-hunt.png" },
+    { rank: "1st", event: "Hack Quest", org: "Suguna College of Engineering", date: "Oct 2024", image: "wins/suguna.png" },
+    { rank: "1st", event: "Pixel Pursuit", org: "PSG iTech", date: "2024", image: "wins/psg.png" },
+    { rank: "2nd", event: "Find Boo Boo", org: "SKCET", date: "Mar 2024", image: "wins/find-boo-boo.png" },
   ],
 
   certifications: [

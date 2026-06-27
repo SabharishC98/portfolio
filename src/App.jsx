@@ -4,6 +4,10 @@ import { AnimatePresence } from 'framer-motion';
 // Components
 import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
+import PageTransition from './components/PageTransition';
+import FloatingCrosshair from './components/FloatingCrosshair';
+import ScrollProgressBar from './components/ScrollProgressBar';
+import ClickParticles from './components/ClickParticles';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
@@ -15,7 +19,7 @@ import AchievementsSection from './components/AchievementsSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 
-// Theme & Effects Components
+import MarqueeTicker from './components/MarqueeTicker';
 import BackgroundGrid from './components/BackgroundGrid';
 import ViewportFrame from './components/ViewportFrame';
 
@@ -79,6 +83,18 @@ function App() {
       {/* Custom cursor (desktop only) */}
       <CustomCursor proMode={proMode} />
 
+      {/* Scroll progress bar */}
+      <ScrollProgressBar />
+
+      {/* Click particle burst */}
+      <ClickParticles />
+
+      {/* Trionn-style floating + crosshair echo (desktop only) */}
+      <FloatingCrosshair />
+
+      {/* Trionn-style belt wipe page transition */}
+      {!loading && <PageTransition />}
+
       {/* Preloader */}
       <AnimatePresence>
         {loading && <Preloader onComplete={handlePreloaderComplete} />}
@@ -91,6 +107,7 @@ function App() {
 
           <main className="transition-colors duration-700">
             <HeroSection proMode={proMode} />
+            <MarqueeTicker proMode={proMode} />
             <AboutSection proMode={proMode} />
             <SkillsSection proMode={proMode} />
             <ProjectsSection proMode={proMode} />

@@ -60,70 +60,14 @@ const AchievementsSection = ({ proMode }) => {
           {achievements.map((item, i) => {
             const colors = RANK_COLORS[item.rank] || RANK_COLORS['1st'];
             return (
-              <motion.div
+              <AchievementCard
                 key={i}
-                initial={{ opacity: 0, y: 30, scale: 0.96 }}
-                animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.08 + 0.2,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                onMouseEnter={() => {
-                  if (proMode) {
-                    window.dispatchEvent(
-                      new CustomEvent('hud-log', { detail: `SCAN: WIN // ${item.event.toUpperCase()}` })
-                    );
-                  }
-                }}
-                className={`achievement-card glass rounded-2xl p-6 transition-all duration-500 ${
-                  proMode ? 'pro-card-border bg-[#030d07]/30 text-emerald-400' : ''
-                }`}
-                style={proMode ? {} : { boxShadow: colors.glow }}
-              >
-                {/* Rank badge */}
-                <div className="mb-4 flex items-center">
-                  <span
-                    className={`text-xs font-display font-bold px-3 py-1 rounded-full transition-colors duration-500 ${
-                      proMode 
-                        ? 'bg-emerald-950/20 border border-emerald-500/30 text-emerald-400' 
-                        : ''
-                    }`}
-                    style={proMode ? {} : {
-                      background: colors.bg,
-                      border: `1px solid ${colors.border}`,
-                      color: colors.text,
-                    }}
-                  >
-                    {item.rank}
-                  </span>
-                </div>
-
-                <h3 
-                  className={`font-display font-bold text-lg mb-2 leading-tight transition-colors duration-500 ${
-                    proMode ? 'text-emerald-400' : 'text-[#F0F0F0]'
-                  }`}
-                >
-                  {item.event}
-                </h3>
-                <p 
-                  className={`text-sm font-body transition-colors duration-500 ${
-                    proMode ? 'text-emerald-500/60' : 'text-[#888888]'
-                  }`}
-                >
-                  {item.org}
-                </p>
-
-                {/* Gold/Emerald bar accent */}
-                <div
-                  className="mt-4 h-px transition-all duration-500"
-                  style={{ 
-                    background: proMode
-                      ? 'linear-gradient(90deg, rgba(16,185,129,0.3), transparent)'
-                      : `linear-gradient(90deg, ${colors.text}40, transparent)` 
-                  }}
-                />
-              </motion.div>
+                item={item}
+                index={i}
+                inView={inView}
+                colors={colors}
+                proMode={proMode}
+              />
             );
           })}
         </div>
@@ -195,6 +139,103 @@ const AchievementsSection = ({ proMode }) => {
         </motion.div>
       </div>
     </section>
+  );
+};
+
+/* ── Individual card with hover-reveal image ── */
+const AchievementCard = ({ item, index, inView, colors, proMode }) => {
+  const base = import.meta.env.BASE_URL;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, scale: 0.96 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.08 + 0.2,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      onMouseEnter={() => {
+        if (proMode) {
+          window.dispatchEvent(
+            new CustomEvent('hud-log', { detail: `SCAN: WIN // ${item.event.toUpperCase()}` })
+          );
+        }
+      }}
+      className={`achievement-card glass rounded-2xl overflow-hidden transition-all duration-500 group relative ${
+        proMode ? 'pro-card-border bg-[#030d07]/30 text-emerald-400' : ''
+      }`}
+      style={proMode ? {} : { boxShadow: colors.glow }}
+    >
+      {/* Hover image overlay — only for cards that have an image */}
+      {item.image && (
+        <div
+          className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{ pointerEvents: 'none' }}
+        >
+          <img
+            src={`${base}${item.image}`}
+            alt={item.event}
+            className="w-full h-full object-cover"
+          />
+          {/* Dark gradient overlay so text stays legible */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
+        </div>
+      )}
+
+      {/* Card content — always on top */}
+      <div className="relative z-20 p-6">
+        {/* Rank badge */}
+        <div className="mb-4 flex items-center">
+          <span
+            className={`text-xs font-display font-bold px-3 py-1 rounded-full transition-colors duration-500 ${
+              proMode 
+                ? 'bg-emerald-950/20 border border-emerald-500/30 text-emerald-400' 
+                : ''
+            }`}
+            style={proMode ? {} : {
+              background: colors.bg,
+              border: `1px solid ${colors.border}`,
+              color: colors.text,
+            }}
+          >
+            {item.rank}
+          </span>
+        </div>
+
+        <h3 
+          className={`font-display font-bold text-lg mb-2 leading-tight transition-colors duration-500 ${
+            proMode ? 'text-emerald-400' : 'text-[#F0F0F0]'
+          }`}
+        >
+          {item.event}
+        </h3>
+        <p 
+          className={`text-sm font-body transition-colors duration-500 ${
+            proMode ? 'text-emerald-500/60' : 'text-[#888888]'
+          }`}
+        >
+          {item.org}
+        </p>
+
+        {/* Accent bar */}
+        <div
+          className="mt-4 h-px transition-all duration-500"
+          style={{ 
+            background: proMode
+              ? 'linear-gradient(90deg, rgba(16,185,129,0.3), transparent)'
+              : `linear-gradient(90deg, ${colors.text}40, transparent)` 
+          }}
+        />
+
+        {/* "View photo" hint — only shows on hover for cards with images */}
+        {item.image && (
+          <p className="mt-3 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white/70 font-mono tracking-widest">
+            ↑ EVENT PHOTO
+          </p>
+        )}
+      </div>
+    </motion.div>
   );
 };
 

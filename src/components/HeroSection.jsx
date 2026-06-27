@@ -1,6 +1,9 @@
 import { Suspense, lazy, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
+import SplitText from './SplitText';
+import MorphBlob from './MorphBlob';
+import TextScramble from './TextScramble';
 
 const ParticleCanvas = lazy(() => import('./ParticleCanvas'));
 
@@ -64,6 +67,15 @@ const HeroSection = ({ proMode }) => {
       id="hero"
       className="relative w-full min-h-screen flex items-center justify-start overflow-hidden bg-[#000000] py-20"
     >
+      {/* Morphing blob backgrounds */}
+      <MorphBlob
+        style={{ top: '-10%', right: '-8%', opacity: proMode ? 0.3 : 1 }}
+      />
+      <MorphBlob
+        style={{ bottom: '-15%', left: '-12%', opacity: proMode ? 0.15 : 0.4, animationDelay: '-6s' }}
+        className="scale-75"
+      />
+
       {/* Particle Background */}
       <Suspense fallback={null}>
         <div className="absolute inset-0 z-0">
@@ -97,49 +109,45 @@ const HeroSection = ({ proMode }) => {
       >
         {/* Eyebrow tag */}
         <motion.div variants={itemVariants} className="mb-8">
-          <span 
-            className={`section-tag font-mono text-xs tracking-[0.3em] uppercase transition-colors duration-500 ${
+          <TextScramble
+            text="◈ Available for opportunities"
+            tag="span"
+            className={`font-mono text-xs tracking-[0.3em] uppercase transition-colors duration-500 ${
               proMode ? 'text-emerald-500/80' : 'text-[#7f7f7f]'
             }`}
-          >
-            ◈ Available for opportunities
-          </span>
+          />
         </motion.div>
 
-        {/* Main headline */}
+        {/* Main headline — Trionn-style char-by-char reveal */}
         <div className="hero-title font-condensed uppercase select-none mb-6 overflow-hidden flex flex-col leading-[0.9] tracking-tighter">
-          <motion.div 
-            variants={itemVariants} 
+          <div
             className={`transition-colors duration-500 ${
               proMode ? 'text-emerald-400 drop-shadow-[0_0_12px_rgba(16,185,129,0.3)]' : 'text-white'
             }`}
           >
-            Building Intelligent
-          </motion.div>
-          <motion.div 
-            variants={itemVariants} 
+            <SplitText text="Building Intelligent" delay={0.2} stagger={0.022} />
+          </div>
+          <div
             className={`transition-colors duration-500 ${
               proMode ? 'text-emerald-950/60' : 'text-[#333333]'
             }`}
           >
-            Systems Designed To
-          </motion.div>
-          <motion.div 
-            variants={itemVariants} 
+            <SplitText text="Systems Designed To" delay={0.45} stagger={0.022} />
+          </div>
+          <div
             className={`transition-colors duration-500 ${
               proMode ? 'text-emerald-400 drop-shadow-[0_0_12px_rgba(16,185,129,0.3)]' : 'text-white'
             }`}
           >
-            Transform Complex Logic
-          </motion.div>
-          <motion.div 
-            variants={itemVariants} 
+            <SplitText text="Transform Complex Logic" delay={0.7} stagger={0.018} />
+          </div>
+          <div
             className={`transition-colors duration-500 ${
               proMode ? 'text-emerald-950/60' : 'text-[#333333]'
             }`}
           >
-            Into Secure Visual Action.
-          </motion.div>
+            <SplitText text="Into Secure Visual Action." delay={0.92} stagger={0.018} />
+          </div>
         </div>
 
         {/* Subtitle */}

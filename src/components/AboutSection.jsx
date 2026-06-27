@@ -1,6 +1,8 @@
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { portfolioData } from '../data/portfolioData';
+import AnimatedCounter from './AnimatedCounter';
+import TextScramble from './TextScramble';
 
 const AboutSection = ({ proMode }) => {
   const { personal, stats } = portfolioData;
@@ -50,45 +52,61 @@ const AboutSection = ({ proMode }) => {
                 proMode ? 'text-emerald-400 drop-shadow-[0_0_12px_rgba(16,185,129,0.3)]' : 'text-white'
               }`}
             >
-              Full-Stack
+              <TextScramble
+                text="Full-Stack"
+                tag="span"
+                className="block"
+              />
               <br />
-              <span className={proMode ? 'text-emerald-500/70' : 'gradient-text'}>Developer</span>
+              <TextScramble
+                text="Developer"
+                tag="span"
+                className={proMode ? 'text-emerald-500/70' : 'gradient-text'}
+              />
               <br />
-              & AI Engineer.
+              <TextScramble
+                text="& AI Engineer."
+                tag="span"
+                className="block"
+              />
             </motion.h2>
 
             {/* Stat blocks */}
             <motion.div {...fadeUp(0.2)} className="grid grid-cols-3 gap-4">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className={`glass rounded-xl p-5 text-center glass-hover transition-all duration-500 ${
-                    proMode ? 'pro-card-border bg-[#0b1b15]/20 text-emerald-400' : ''
-                  }`}
-                  onMouseEnter={() => {
-                    if (proMode) {
-                      window.dispatchEvent(
-                        new CustomEvent('hud-log', { detail: `SCAN: STATS // ${stat.label.toUpperCase()}` })
-                      );
-                    }
-                  }}
-                >
-                  <div 
-                    className={`font-condensed font-bold text-3xl md:text-4xl mb-1 transition-colors duration-500 ${
-                      proMode ? 'text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.3)]' : 'text-white'
+              {stats.map((stat) => {
+                const numVal = parseInt(stat.value.replace(/\D/g, ''), 10);
+                const sfx = stat.value.replace(/[0-9]/g, '');
+                return (
+                  <div
+                    key={stat.label}
+                    className={`glass rounded-xl p-5 text-center glass-hover transition-all duration-500 ${
+                      proMode ? 'pro-card-border bg-[#0b1b15]/20 text-emerald-400' : ''
                     }`}
+                    onMouseEnter={() => {
+                      if (proMode) {
+                        window.dispatchEvent(
+                          new CustomEvent('hud-log', { detail: `SCAN: STATS // ${stat.label.toUpperCase()}` })
+                        );
+                      }
+                    }}
                   >
-                    {stat.value}
+                    <div
+                      className={`font-condensed font-bold text-3xl md:text-4xl mb-1 transition-colors duration-500 ${
+                        proMode ? 'text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.3)]' : 'text-white'
+                      }`}
+                    >
+                      <AnimatedCounter end={numVal} suffix={sfx} duration={1600} />
+                    </div>
+                    <div
+                      className={`text-[10px] uppercase tracking-wider font-mono leading-tight transition-colors duration-500 ${
+                        proMode ? 'text-emerald-500/50' : 'text-[#7f7f7f]'
+                      }`}
+                    >
+                      {stat.label}
+                    </div>
                   </div>
-                  <div 
-                    className={`text-[10px] uppercase tracking-wider font-mono leading-tight transition-colors duration-500 ${
-                      proMode ? 'text-emerald-500/50' : 'text-[#7f7f7f]'
-                    }`}
-                  >
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </motion.div>
           </div>
 
