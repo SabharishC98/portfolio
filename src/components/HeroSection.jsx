@@ -183,33 +183,6 @@ const HeroSection = ({ proMode }) => {
             Download Resume ↗
           </a>
         </motion.div>
-
-        {/* Stats row */}
-        <motion.div
-          variants={itemVariants}
-          className={`flex gap-12 mt-16 pt-10 border-t transition-colors duration-500 ${
-            proMode ? 'border-emerald-500/10' : 'border-white/[0.05]'
-          }`}
-        >
-          {portfolioData.stats.map((stat) => (
-            <div key={stat.label}>
-              <div 
-                className={`font-condensed font-bold text-4xl md:text-5xl transition-colors duration-500 ${
-                  proMode ? 'text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.25)]' : 'text-white'
-                }`}
-              >
-                {stat.value}
-              </div>
-              <div 
-                className={`text-[10px] font-mono uppercase tracking-widest mt-2 transition-colors duration-500 ${
-                  proMode ? 'text-emerald-500/40' : 'text-[#7f7f7f]'
-                }`}
-              >
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}

@@ -64,14 +64,21 @@ const Navbar = () => {
                 onClick={() => handleNav(link.href)}
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                className={`nav-link relative text-sm transition-all duration-300 font-display ${
+                className={`nav-link relative px-3 py-1.5 text-sm transition-all duration-300 font-display ${
                   hoveredIndex === null
                     ? 'text-[#888888] hover:text-[#F0F0F0]'
                     : hoveredIndex === i
                     ? 'text-[#F0F0F0]'
-                    : 'text-[#888888]/30 font-light'
+                    : 'text-[#888888]/40'
                 }`}
               >
+                {hoveredIndex === i && (
+                  <motion.span
+                    layoutId="nav-hover-bg"
+                    className="absolute inset-0 bg-white/5 rounded-md -z-10"
+                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                  />
+                )}
                 {link.label}
               </button>
             ))}

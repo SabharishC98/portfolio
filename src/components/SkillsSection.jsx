@@ -94,7 +94,7 @@ const SkillsSection = ({ proMode }) => {
                     className={`skill-pill px-4 py-2 rounded-full text-sm font-body transition-all duration-300 ${
                       proMode 
                         ? '!border-emerald-500/25 bg-emerald-950/10 !text-emerald-400/80 hover:!border-emerald-400 hover:!text-emerald-300 hover:bg-emerald-900/30 hover:scale-105 hover:-translate-y-1' 
-                        : ''
+                        : 'border border-white/10 text-[#888888] hover:border-white hover:text-white hover:bg-white/5 hover:scale-105 hover:-translate-y-1 shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_20px_rgba(255,255,255,0.05)]'
                     }`}
                   >
                     {skill}

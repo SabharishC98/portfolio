@@ -31,7 +31,7 @@ export const portfolioData = {
     },
     {
       category: "Frontend",
-      items: ["React.js", "Vite", "HTML5", "CSS3"],
+      items: ["React.js", "Bootstrap", "JavaScript (ES6+)", "Tailwind CSS", "HTML5/CSS3"],
     },
     {
       category: "Backend",
@@ -144,6 +144,8 @@ export const portfolioData = {
   ],
 
   achievements: [
+    { rank: "Selected", event: "State Level Buildathon", org: "NxtWave x OpenAI Academy", date: "2025" },
+    { rank: "Finalist", event: "Hackathon", org: "Odooxkahe", date: "2025" },
     { rank: "1st", event: "Coder's Arena", org: "Bannari Amman Institute of Technology", date: "Nov 2024" },
     { rank: "1st", event: "Glitch Hunt (Debugging)", org: "Bannari Amman Institute of Technology", date: "Nov 2024" },
     { rank: "1st", event: "Hack Quest", org: "Suguna College of Engineering", date: "Oct 2024" },

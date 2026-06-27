@@ -54,7 +54,7 @@ const AboutSection = ({ proMode }) => {
               <br />
               <span className={proMode ? 'text-emerald-500/70' : 'gradient-text'}>Developer</span>
               <br />
-              & Researcher.
+              & AI Engineer.
             </motion.h2>
 
             {/* Stat blocks */}
