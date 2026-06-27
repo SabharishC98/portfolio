@@ -82,7 +82,7 @@ const AchievementsSection = ({ proMode }) => {
                 style={proMode ? {} : { boxShadow: colors.glow }}
               >
                 {/* Rank badge */}
-                <div className="flex items-center justify-between mb-4">
+                <div className="mb-4 flex items-center">
                   <span
                     className={`text-xs font-display font-bold px-3 py-1 rounded-full transition-colors duration-500 ${
                       proMode 
@@ -95,14 +95,7 @@ const AchievementsSection = ({ proMode }) => {
                       color: colors.text,
                     }}
                   >
-                    {item.rank} Place
-                  </span>
-                  <span 
-                    className={`text-xs font-mono transition-colors duration-500 ${
-                      proMode ? 'text-emerald-500/50' : 'text-[#888888]'
-                    }`}
-                  >
-                    {item.date}
+                    {item.rank}
                   </span>
                 </div>
 
